@@ -230,4 +230,17 @@ kalau mau web terasa instant, benerin urutan ini dulu:
 
 ---
 
+## 14. Fondasi Kebiasaan — berlaku di semua project
+
+✅ gambar → selalu WebP + lazy load
+✅ HTML → selalu semantic (nav, main, article)
+✅ API → selalu pagination, jangan kirim semua data
+✅ database → selalu index kolom yang di-query
+✅ variabel sensitif → selalu di .env, tidak pernah hardcode
+✅ error handling → selalu ada, tidak pernah dibiarkan kosong
+✅ loading state → selalu ada kalau ada fetch data
+✅ mobile → selalu test di mobile sebelum selesai
+✅ console.log → selalu dihapus sebelum push ke repo
+✅ Lighthouse → selalu cek score sebelum deploy
+
 > **intinya:** web cepat bukan soal framework — tapi kebiasaan nulis kode yang benar dari awal. saya masih terus belajar dari dua sisi, frontend dan backend, karena semakin dalam dipelajari semakin banyak yang ingin saya tau. dan itu yang membuat saya terus penasaran.
