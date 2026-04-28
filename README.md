@@ -1,9 +1,11 @@
 # Web Performance Best Practices
 > kebiasaan baik dari awal, berlaku untuk project statis maupun dinamis.
+> standar industri — frontend, backend, fullstack.
 
 ---
 
 ## 1. Core Web Vitals — standar Google
+
 metrik utama yang dipakai industri untuk mengukur performa:
 
 | Metrik | Artinya | Target |
@@ -49,7 +51,7 @@ metrik utama yang dipakai industri untuk mengukur performa:
 ```
 
 ### Routing & Transisi
-- pakai **client-side routing** agar pindah halaman tanpa reload (Next.js built-in)
+- pakai **client-side routing** agar pindah halaman tanpa reload
 - aktifkan **prefetch** — halaman berikutnya diload sebelum diklik
 - di Astro pakai **View Transitions** untuk efek transisi mulus
 
@@ -105,7 +107,7 @@ Database cache  → simpan hasil query berat
 
 ---
 
-## 5. Security — yang ngaruh ke performa & profesionalisme
+## 5. Security
 ```
 ✅ environment variables   → jangan hardcode API key di kode
 ✅ rate limiting di API    → cegah spam request
@@ -117,23 +119,72 @@ Database cache  → simpan hasil query berat
 
 ---
 
-## 6. Monitoring — wajib di production
-sering dilupakan, padahal ini yang bikin developer terlihat profesional:
+## 6. Accessibility (a11y)
+sering diabaikan, padahal ngaruh ke SEO dan profesionalisme:
+```
+✅ alt text di semua gambar
+✅ semantic HTML — pakai <nav>, <main>, <article>, <section>
+✅ keyboard navigable — semua fungsi bisa dipakai tanpa mouse
+✅ contrast ratio cukup — teks harus terbaca jelas
+✅ focus indicator — elemen yang difokus harus kelihatan
+```
+> test pakai: Lighthouse accessibility score atau axe DevTools extension.
 
+---
+
+## 7. Mobile First
+```
+✅ design dari mobile dulu, baru desktop
+✅ touch target minimal 44x44px — tombol tidak boleh terlalu kecil
+✅ test di berbagai ukuran layar sebelum deploy
+✅ tidak ada horizontal scroll di mobile
+✅ font size minimal 16px untuk body text
+```
+> di Tailwind: mulai dari class default (mobile), baru tambah md: lg: untuk desktop.
+
+---
+
+## 8. Testing
+wajib di industri, sering dilupakan developer junior:
+
+```
+unit test        → test fungsi / komponen satu per satu (Jest, Vitest)
+integration test → test alur dari frontend ke backend
+e2e test         → simulasi user buka browser beneran (Playwright, Cypress)
+```
+
+> rule of thumb: tidak perlu 100% coverage —
+> fokus test di bagian yang paling kritis dan paling sering dipakai.
+
+---
+
+## 9. CI/CD — otomasi deploy
+```
+setiap push ke GitHub:
+  → otomatis jalankan test
+  → kalau test pass → otomatis deploy
+  → kalau test fail → deploy dibatalkan
+
+tools:
+  GitHub Actions  → untuk custom pipeline
+  Vercel          → otomatis deploy setiap push (tanpa setup)
+```
+> dengan CI/CD, tidak ada lagi "works on my machine" — semua terverifikasi otomatis.
+
+---
+
+## 10. Monitoring — wajib di production
 ```
 Sentry           → track error yang terjadi di production
 Vercel Analytics → monitor performa real user
 Uptime Robot     → notifikasi kalau website down
 Lighthouse CI    → cek performa otomatis setiap deploy
 ```
-
-> prinsipnya: kalau tidak dimonitor, kamu tidak akan tau ada masalah
-> sampai user komplain.
+> kalau tidak dimonitor, kamu tidak akan tau ada masalah sampai user komplain.
 
 ---
 
-## 7. Deploy & Infrastruktur
-
+## 11. Deploy & Infrastruktur
 ```
 Frontend (Next.js / Astro)  → Vercel atau Netlify
 Backend (Node.js / Express) → Railway atau Render
@@ -141,12 +192,11 @@ CDN & proteksi              → Cloudflare
 Database                    → Supabase / Railway / PlanetScale
 Cache server                → Upstash (Redis serverless)
 ```
-
 > deploy di CDN = otomatis lebih cepat karena server lebih dekat ke user.
 
 ---
 
-## 8. Urutan Prioritas
+## 12. Urutan Prioritas
 
 kalau mau web terasa instant, benerin urutan ini dulu:
 
@@ -161,7 +211,7 @@ kalau mau web terasa instant, benerin urutan ini dulu:
 
 ---
 
-## 9. Checklist Sebelum Deploy
+## 13. Checklist Sebelum Deploy
 
 - [ ] Lighthouse score > 90 di semua kategori
 - [ ] semua gambar pakai WebP + ukuran sesuai
@@ -173,10 +223,11 @@ kalau mau web terasa instant, benerin urutan ini dulu:
 - [ ] test di mobile — bukan cuma desktop
 - [ ] cek network tab — tidak ada request yang tidak perlu
 - [ ] database sudah pakai indexing di kolom yang sering di-query
+- [ ] accessibility score > 90 di Lighthouse
+- [ ] semua gambar punya alt text
+- [ ] tidak ada horizontal scroll di mobile
+- [ ] test basic e2e — alur utama user bisa jalan
 
 ---
 
-> **intinya:** performa web bukan soal framework yang digunakan,
-> tetapi bagaimana kita menulis kode yang efisien sejak awal.
-> fokusnya bukan menghilangkan loading sepenuhnya,
-> melainkan membuatnya cepat, konsisten, dan nyaman bagi pengguna di berbagai kondisi.
+> **intinya:** web cepat bukan soal framework — tapi kebiasaan nulis kode yang benar dari awal. saya masih terus belajar dari dua sisi, frontend dan backend, karena semakin dalam dipelajari semakin banyak yang ingin saya tau. dan itu yang membuat saya terus penasaran.
